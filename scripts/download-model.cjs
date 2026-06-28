@@ -17,7 +17,7 @@ const outPath = path.join(dest, 'yolov8n.onnx');
 
 // Already exists?
 if (fs.existsSync(outPath) && fs.statSync(outPath).size > 1e6) {
-  console.log(`✓ yolov8n.onnx already exists (${(fs.statSync(outPath).size / 1e6).toFixed(1)} MB)`);
+  console.log(`yolov8n.onnx already exists (${(fs.statSync(outPath).size / 1e6).toFixed(1)} MB)`);
   process.exit(0);
 }
 
@@ -91,27 +91,27 @@ print('OK:', dst)
 (async () => {
   // 1. Try Node https with multiple URLs
   for (const url of URLS) {
-    console.log(`  ↓ Node: ${url}`);
+    console.log(`  Node: ${url}`);
     try {
       await nodeDownload(url);
       if (fs.existsSync(outPath) && fs.statSync(outPath).size > 1e6) {
-        console.log(`✓ Saved: public/models/yolov8n.onnx (${(fs.statSync(outPath).size / 1e6).toFixed(1)} MB)`);
+        console.log(`Saved: public/models/yolov8n.onnx (${(fs.statSync(outPath).size / 1e6).toFixed(1)} MB)`);
         process.exit(0);
       }
-    } catch (e) { console.log(`  ✗ ${e.message}`); }
+    } catch (e) { console.log(`  ${e.message}`); }
   }
 
   // 2. Try PowerShell
   for (const url of URLS) {
     if (tryPowerShell(url)) {
-      console.log(`✓ Saved via PowerShell (${(fs.statSync(outPath).size / 1e6).toFixed(1)} MB)`);
+      console.log(`Saved via PowerShell (${(fs.statSync(outPath).size / 1e6).toFixed(1)} MB)`);
       process.exit(0);
     }
   }
 
   // 3. Try Python
   if (tryPython()) {
-    console.log(`✓ Exported via Python (${(fs.statSync(outPath).size / 1e6).toFixed(1)} MB)`);
+    console.log(`Exported via Python (${(fs.statSync(outPath).size / 1e6).toFixed(1)} MB)`);
     process.exit(0);
   }
 
